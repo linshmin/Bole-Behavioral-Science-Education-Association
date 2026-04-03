@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>伯樂行為科學教育與發展協會 - 知識庫</title>
+    <title>Bole BSEA - 伯樂行為科學教育與發展協會</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,13 +11,11 @@
             --primary-light: #4A7C99;
             --secondary: #E8913A;
             --accent: #F4D06F;
-            --bg: #FAFBFC;
+            --bg: #F7F9FA;
             --card-bg: #FFFFFF;
             --text: #2D3748;
             --text-light: #718096;
             --border: #E2E8F0;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
         * {
@@ -31,127 +29,113 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            background-image: radial-gradient(circle at 10% 20%, rgba(44, 95, 124, 0.03) 0%, transparent 20%),
-                              radial-gradient(circle at 90% 80%, rgba(232, 145, 58, 0.03) 0%, transparent 20%);
         }
 
-        /* 導航列 */
+        /* 簡化導航 - 不再sticky */
         .navbar {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            background: var(--primary);
             color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 3px solid var(--secondary);
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
             background: var(--accent);
+            color: var(--primary);
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary);
-            font-size: 1.2rem;
+            font-weight: 900;
         }
 
-        /* 搜尋與篩選區 */
-        .control-panel {
+        .subtitle {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-top: 0.25rem;
+        }
+
+        /* 搜尋區 - 簡化為一般區塊 */
+        .search-section {
             background: white;
+            padding: 1rem;
             border-bottom: 1px solid var(--border);
-            padding: 2rem 0;
-            position: sticky;
-            top: 73px;
-            z-index: 99;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .search-wrapper {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
         }
 
         .search-box {
-            flex: 1;
-            min-width: 250px;
+            max-width: 600px;
+            margin: 0 auto;
             position: relative;
         }
 
         .search-box input {
             width: 100%;
-            padding: 0.875rem 1rem 0.875rem 3rem;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
             border: 2px solid var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
             font-size: 1rem;
-            transition: all 0.3s;
             font-family: inherit;
         }
 
         .search-box input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(44, 95, 124, 0.1);
         }
 
         .search-icon {
             position: absolute;
-            left: 1rem;
+            left: 0.75rem;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-light);
         }
 
+        /* 橫向滾動的篩選標籤 */
+        .filter-wrapper {
+            margin-top: 0.75rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .filter-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
         .filter-tags {
             display: flex;
             gap: 0.5rem;
-            flex-wrap: wrap;
+            padding-bottom: 0.25rem;
+            min-width: max-content;
+            justify-content: center;
         }
 
         .tag {
-            padding: 0.5rem 1rem;
+            padding: 0.375rem 0.875rem;
             background: var(--bg);
-            border: 2px solid var(--border);
+            border: 1px solid var(--border);
             border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s;
             font-size: 0.875rem;
-            font-weight: 500;
-            user-select: none;
+            white-space: nowrap;
+            transition: all 0.2s;
         }
 
         .tag:hover {
+            background: var(--primary-light);
+            color: white;
             border-color: var(--primary-light);
-            color: var(--primary);
         }
 
         .tag.active {
@@ -161,110 +145,92 @@
         }
 
         .stats {
-            color: var(--text-light);
+            text-align: center;
             font-size: 0.875rem;
+            color: var(--text-light);
             margin-top: 0.5rem;
         }
 
-        /* 主要內容區 */
+        /* 主要內容區 - 移除大padding */
         .main-content {
-            padding: 3rem 0;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem;
         }
 
+        /* 分類標題簡化 */
         .category-section {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .category-header {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 3px solid var(--border);
-        }
-
-        .category-icon {
-            font-size: 1.5rem;
-        }
-
-        .category-title {
-            font-size: 1.5rem;
-            font-weight: 700;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
             color: var(--primary);
+            font-size: 1.125rem;
+            font-weight: 700;
+            padding-left: 0.5rem;
+            border-left: 4px solid var(--secondary);
         }
 
-        .category-count {
-            background: var(--accent);
-            color: var(--text);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        /* Q&A 卡片 */
-        .qa-grid {
-            display: grid;
-            gap: 1rem;
+        /* 卡片簡化設計 */
+        .qa-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
         .qa-card {
             background: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
+            border-radius: 8px;
+            border: 1px solid var(--border);
             overflow: hidden;
-            transition: all 0.3s;
-            border: 1px solid transparent;
+            transition: box-shadow 0.2s;
         }
 
         .qa-card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
-            border-color: var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .qa-header {
-            padding: 1.5rem;
+            padding: 1rem;
             cursor: pointer;
             display: flex;
-            justify-content: space-between;
             align-items: flex-start;
-            gap: 1rem;
+            gap: 0.75rem;
             background: white;
-            transition: background 0.3s;
-        }
-
-        .qa-header:hover {
-            background: #FAFBFC;
         }
 
         .qa-number {
-            background: linear-gradient(135deg, var(--secondary), #F4A261);
+            background: var(--secondary);
             color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             font-size: 0.875rem;
             flex-shrink: 0;
+            margin-top: 0.125rem;
         }
 
         .qa-question {
             flex: 1;
-            font-weight: 600;
-            font-size: 1.125rem;
-            color: var(--text);
+            font-weight: 500;
             line-height: 1.5;
+            color: var(--text);
         }
 
         .qa-toggle {
             color: var(--text-light);
-            transition: transform 0.3s;
-            font-size: 1.25rem;
+            transition: transform 0.2s;
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
         }
 
         .qa-card.expanded .qa-toggle {
@@ -274,89 +240,39 @@
         .qa-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            transition: max-height 0.3s ease;
             background: #FAFBFC;
         }
 
         .qa-card.expanded .qa-content {
-            max-height: 1000px;
-            transition: max-height 0.5s ease-in;
+            max-height: 500px;
         }
 
         .qa-body {
-            padding: 0 1.5rem 1.5rem;
-            border-top: 1px solid var(--border);
+            padding: 0 1rem 1rem 3.25rem;
         }
 
         .solution-box {
             background: white;
-            border-left: 4px solid var(--primary);
-            padding: 1.25rem;
-            margin-top: 1rem;
-            border-radius: 0 8px 8px 0;
-            position: relative;
-        }
-
-        .solution-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .solution-text {
+            border-left: 3px solid var(--primary);
+            padding: 0.875rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
             color: var(--text);
-            line-height: 1.8;
-            font-size: 1rem;
+            border-radius: 0 6px 6px 0;
         }
 
         .highlight {
-            background: linear-gradient(120deg, rgba(244, 208, 111, 0.3) 0%, rgba(244, 208, 111, 0.3) 100%);
-            background-repeat: no-repeat;
-            background-size: 100% 0.4em;
-            background-position: 0 88%;
-            padding: 0 0.2em;
+            background: rgba(244, 208, 111, 0.4);
+            padding: 0 0.125rem;
+            border-radius: 2px;
             font-weight: 600;
         }
 
-        /* 響應式設計 */
-        @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .container {
-                padding: 0 1rem;
-            }
-
-            .qa-question {
-                font-size: 1rem;
-            }
-
-            .control-panel {
-                top: 69px;
-            }
-        }
-
-        /* 動畫 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .qa-card {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-
-        /* 無結果提示 */
+        /* 無結果 */
         .no-results {
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 3rem 1rem;
             color: var(--text-light);
             display: none;
         }
@@ -365,456 +281,211 @@
             display: block;
         }
 
-        .no-results-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        /* 頁尾 */
+        /* 頁尾簡化 */
         footer {
-            background: var(--primary);
-            color: white;
             text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
+            padding: 2rem 1rem;
+            color: var(--text-light);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
         }
 
-        .print-btn {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--secondary);
-            color: white;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow-lg);
-            font-size: 1.5rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 98;
-        }
-
-        .print-btn:hover {
-            transform: scale(1.1) rotate(10deg);
-            background: #D4802F;
-        }
-
-        @media print {
-            .navbar, .control-panel, .print-btn, footer {
-                display: none;
+        /* 響應式 */
+        @media (max-width: 640px) {
+            .filter-tags {
+                justify-content: flex-start;
             }
             
-            .qa-content {
-                max-height: none !important;
+            .qa-body {
+                padding-left: 1rem;
             }
-            
-            .qa-card {
-                break-inside: avoid;
-                margin-bottom: 1rem;
-                box-shadow: none;
-                border: 1px solid #ddd;
-            }
+        }
+
+        /* 動畫 */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .qa-card {
+            animation: slideIn 0.3s ease-out;
         }
     </style>
 </head>
 <body>
 
-    <!-- 導航列 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="logo-icon">伯</div>
-                <div>伯樂行為科學教育與發展協會</div>
-            </div>
-            <div style="font-size: 0.9rem; opacity: 0.9;">內部知識庫與問答系統</div>
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-icon">伯</span>
+            <span>伯樂行為科學教育與發展協會</span>
         </div>
-    </nav>
+        <div class="subtitle">Bole Behavioral Science Education Association</div>
+    </header>
 
-    <!-- 搜尋與篩選 -->
-    <div class="control-panel">
-        <div class="container">
-            <div class="search-wrapper">
-                <div class="search-box">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="searchInput" placeholder="搜尋問題或關鍵字...">
-                </div>
-            </div>
-            
+    <section class="search-section">
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="搜尋問題關鍵字...">
+        </div>
+        
+        <div class="filter-wrapper">
             <div class="filter-tags">
-                <div class="tag active" data-category="all">全部顯示</div>
+                <div class="tag active" data-category="all">全部</div>
                 <div class="tag" data-category="operation">組織運營</div>
-                <div class="tag" data-category="fundraising">募款與財務</div>
+                <div class="tag" data-category="fundraising">募款財務</div>
                 <div class="tag" data-category="education">教育合作</div>
                 <div class="tag" data-category="branding">品牌發展</div>
                 <div class="tag" data-category="vision">願景目標</div>
             </div>
-            
-            <div class="stats">
-                目前顯示 <strong id="visibleCount">32</strong> 個問題
-            </div>
-        </div>
-    </div>
-
-    <!-- 主要內容 -->
-    <main class="main-content">
-        <div class="container" id="contentArea">
-            <!-- 內容將由 JavaScript 動態生成 -->
         </div>
         
-        <div class="no-results" id="noResults">
-            <div class="no-results-icon">🔍</div>
-            <h3>找不到相關問題</h3>
-            <p>請嘗試其他關鍵字或切換分類</p>
-        </div>
+        <div class="stats">共 <strong id="visibleCount">32</strong> 個問題</div>
+    </section>
+
+    <main class="main-content" id="contentArea">
+        <!-- 內容由 JavaScript 生成 -->
     </main>
 
-    <!-- 列印按鈕 -->
-    <button class="print-btn" onclick="window.print()" title="列印/儲存PDF">🖨️</button>
+    <div class="no-results" id="noResults">
+        <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔍</div>
+        <p>找不到符合的問題</p>
+    </div>
 
-    <!-- 頁尾 -->
     <footer>
-        <p>伯樂行為科學教育與發展協會 | 讓每個孩子在被理解中成長</p>
-        <p style="font-size: 0.875rem; margin-top: 0.5rem; opacity: 0.8;">最後更新：2026年4月</p>
+        <p>讓每個孩子在被理解中成長</p>
     </footer>
 
     <script>
-        // 資料定義 - 依據 Excel 內容
         const qaData = [
-            {
-                id: 1,
-                category: "operation",
-                question: "大眾聽到協會訴求覺得沒感覺",
-                solution: "改說法：「我們在阻止孩子被誤解」，用真實案例打動，而非理念"
-            },
-            {
-                id: 2,
-                category: "branding",
-                question: "協會缺乏簡潔有力的口號",
-                solution: "建議口號：「看懂孩子，而不是定義孩子」"
-            },
-            {
-                id: 3,
-                category: "branding",
-                question: "大眾覺得類似的協會很多",
-                solution: "強調差異：我們不是做教育資源，而是做「人性理解」"
-            },
-            {
-                id: 4,
-                category: "operation",
-                question: "適合的理監事不好找",
-                solution: "用「使命感＋影響力」吸引：你在改變一整代孩子"
-            },
-            {
-                id: 5,
-                category: "operation",
-                question: "地方上沒有適合的人力推動",
-                solution: "建立「種子講師制度」，從學員中培養推動者"
-            },
-            {
-                id: 6,
-                category: "operation",
-                question: "理監事掛名不做事",
-                solution: "設「任務制＋績效回報」，每人有具體責任"
-            },
-            {
-                id: 7,
-                category: "operation",
-                question: "地方組織無法有效的發展",
-                solution: "SOP化：講座→培訓→校園→家長→循環"
-            },
-            {
-                id: 8,
-                category: "operation",
-                question: "協會人力不夠",
-                solution: "用「志工＋學員轉推廣者機制」擴大"
-            },
-            {
-                id: 9,
-                category: "fundraising",
-                question: "協會沒錢",
-                solution: "建立三收入：捐款＋企業贊助＋課程收入"
-            },
-            {
-                id: 10,
-                category: "operation",
-                question: "協會沒有專人負責",
-                solution: "設「執行長制」，負責日常運營"
-            },
-            {
-                id: 11,
-                category: "fundraising",
-                question: "群眾質疑「為什麼要捐錢給國中老師，他都比我有穩定的收入」",
-                solution: "轉觀念：不是幫老師，是影響「一個老師×數百學生」"
-            },
-            {
-                id: 12,
-                category: "education",
-                question: "老師、校長不願來上課",
-                solution: "改切入點：幫老師減少壓力、提升班級管理"
-            },
-            {
-                id: 13,
-                category: "fundraising",
-                question: "捐款者質疑協會的公信力",
-                solution: "建立：公開案例＋合作學校＋見證"
-            },
-            {
-                id: 14,
-                category: "fundraising",
-                question: "捐款者不知如何捐款",
-                solution: "建立：LINE Pay／轉帳／網站一鍵捐款"
-            },
-            {
-                id: 15,
-                category: "branding",
-                question: "協會沒有網站",
-                solution: "建立「三功能網站」：理念＋案例＋捐款"
-            },
-            {
-                id: 16,
-                category: "fundraising",
-                question: "捐款者質疑「為什麼不直接捐助孩子來上課」",
-                solution: "說明：改變老師＝影響更多孩子（槓桿效應）"
-            },
-            {
-                id: 17,
-                category: "fundraising",
-                question: "理監事、捐款者質疑「理事長、秘書長、副秘書長，自己有捐款嗎」",
-                solution: "設立制度：核心幹部需帶頭支持（比例制）"
-            },
-            {
-                id: 18,
-                category: "fundraising",
-                question: "捐款者質疑「錢用到哪裡去了」",
-                solution: "每月公布：收入/支出報表＋成果報告"
-            },
-            {
-                id: 19,
-                category: "vision",
-                question: "如何讓協會的理念成為大家的終生志業",
-                solution: "建立「價值認同＋成就感＋影響力循環」"
-            },
-            {
-                id: 20,
-                category: "vision",
-                question: "協會有沒有辦法發展超過100年",
-                solution: "制度化：SOP＋人才培育＋品牌累積"
-            },
-            {
-                id: 21,
-                category: "education",
-                question: "如何讓學校願意配合 如何開發校長、老師、家長會長",
-                solution: "切入點：免費資源＋教師成長＋學生改變案例"
-            },
-            {
-                id: 22,
-                category: "education",
-                question: "如何舉辦兒童營",
-                solution: "主題：自我認識＋人際互動＋天賦探索"
-            },
-            {
-                id: 23,
-                category: "education",
-                question: "如何舉辦國中的少年營",
-                solution: "加入：未來方向＋自信建立＋溝通能力"
-            },
-            {
-                id: 24,
-                category: "branding",
-                question: "如何提高品牌力（知名度、信任度、支持度）",
-                solution: "三件事：故事曝光＋案例分享＋口碑擴散"
-            },
-            {
-                id: 25,
-                category: "branding",
-                question: "如何國際化",
-                solution: "定位：華人教育心理影響力品牌"
-            },
-            {
-                id: 26,
-                category: "branding",
-                question: "如何發展海外組織",
-                solution: "從：台商、華人社群、教育圈開始"
-            },
-            {
-                id: 27,
-                category: "vision",
-                question: "願景是什麼",
-                solution: "讓每個孩子在被理解中成長"
-            },
-            {
-                id: 28,
-                category: "vision",
-                question: "階段性的目標是什麼",
-                solution: "1年：3校→3年：30校→10年：全台"
-            },
-            {
-                id: 29,
-                category: "branding",
-                question: "如何架構網站",
-                solution: "首頁／理念／案例／課程／捐款／加入我們"
-            },
-            {
-                id: 30,
-                category: "fundraising",
-                question: "財務如何透明",
-                solution: "每月報告＋年度審計"
-            },
-            {
-                id: 31,
-                category: "fundraising",
-                question: "財務的公信力",
-                solution: "第三方會計＋公開帳務"
-            },
-            {
-                id: 32,
-                category: "education",
-                question: "老師為什麼要參加",
-                solution: "三價值：減壓、提升教學、改善學生關係"
-            }
+            { id: 1, category: "operation", question: "大眾聽到協會訴求覺得沒感覺", solution: "改說法：「我們在阻止孩子被誤解」，用真實案例打動，而非理念" },
+            { id: 2, category: "branding", question: "協會缺乏簡潔有力的口號", solution: "建議口號：「看懂孩子，而不是定義孩子」" },
+            { id: 3, category: "branding", question: "大眾覺得類似的協會很多", solution: "強調差異：我們不是做教育資源，而是做「人性理解」" },
+            { id: 4, category: "operation", question: "適合的理監事不好找", solution: "用「使命感＋影響力」吸引：你在改變一整代孩子" },
+            { id: 5, category: "operation", question: "地方上沒有適合的人力推動", solution: "建立「種子講師制度」，從學員中培養推動者" },
+            { id: 6, category: "operation", question: "理監事掛名不做事", solution: "設「任務制＋績效回報」，每人有具體責任" },
+            { id: 7, category: "operation", question: "地方組織無法有效的發展", solution: "SOP化：講座→培訓→校園→家長→循環" },
+            { id: 8, category: "operation", question: "協會人力不夠", solution: "用「志工＋學員轉推廣者機制」擴大" },
+            { id: 9, category: "fundraising", question: "協會沒錢", solution: "建立三收入：捐款＋企業贊助＋課程收入" },
+            { id: 10, category: "operation", question: "協會沒有專人負責", solution: "設「執行長制」，負責日常運營" },
+            { id: 11, category: "fundraising", question: "群眾質疑「為什麼要捐錢給國中老師，他都比我有穩定的收入」", solution: "轉觀念：不是幫老師，是影響「一個老師×數百學生」" },
+            { id: 12, category: "education", question: "老師、校長不願來上課", solution: "改切入點：幫老師減少壓力、提升班級管理" },
+            { id: 13, category: "fundraising", question: "捐款者質疑協會的公信力", solution: "建立：公開案例＋合作學校＋見證" },
+            { id: 14, category: "fundraising", question: "捐款者不知如何捐款", solution: "建立：LINE Pay／轉帳／網站一鍵捐款" },
+            { id: 15, category: "branding", question: "協會沒有網站", solution: "建立「三功能網站」：理念＋案例＋捐款" },
+            { id: 16, category: "fundraising", question: "捐款者質疑「為什麼不直接捐助孩子來上課」", solution: "說明：改變老師＝影響更多孩子（槓桿效應）" },
+            { id: 17, category: "fundraising", question: "理監事、捐款者質疑「理事長、秘書長、副秘書長，自己有捐款嗎」", solution: "設立制度：核心幹部需帶頭支持（比例制）" },
+            { id: 18, category: "fundraising", question: "捐款者質疑「錢用到哪裡去了」", solution: "每月公布：收入/支出報表＋成果報告" },
+            { id: 19, category: "vision", question: "如何讓協會的理念成為大家的終生志業", solution: "建立「價值認同＋成就感＋影響力循環」" },
+            { id: 20, category: "vision", question: "協會有沒有辦法發展超過100年", solution: "制度化：SOP＋人才培育＋品牌累積" },
+            { id: 21, category: "education", question: "如何讓學校願意配合 如何開發校長、老師、家長會長", solution: "切入點：免費資源＋教師成長＋學生改變案例" },
+            { id: 22, category: "education", question: "如何舉辦兒童營", solution: "主題：自我認識＋人際互動＋天賦探索" },
+            { id: 23, category: "education", question: "如何舉辦國中的少年營", solution: "加入：未來方向＋自信建立＋溝通能力" },
+            { id: 24, category: "branding", question: "如何提高品牌力（知名度、信任度、支持度）", solution: "三件事：故事曝光＋案例分享＋口碑擴散" },
+            { id: 25, category: "branding", question: "如何國際化", solution: "定位：華人教育心理影響力品牌" },
+            { id: 26, category: "branding", question: "如何發展海外組織", solution: "從：台商、華人社群、教育圈開始" },
+            { id: 27, category: "vision", question: "願景是什麼", solution: "讓每個孩子在被理解中成長" },
+            { id: 28, category: "vision", question: "階段性的目標是什麼", solution: "1年：3校→3年：30校→10年：全台" },
+            { id: 29, category: "branding", question: "如何架構網站", solution: "首頁／理念／案例／課程／捐款／加入我們" },
+            { id: 30, category: "fundraising", question: "財務如何透明", solution: "每月報告＋年度審計" },
+            { id: 31, category: "fundraising", question: "財務的公信力", solution: "第三方會計＋公開帳務" },
+            { id: 32, category: "education", question: "老師為什麼要參加", solution: "三價值：減壓、提升教學、改善學生關係" }
         ];
 
-        // 分類標籤對應
         const categoryLabels = {
-            operation: { name: "組織運營", icon: "⚙️" },
-            fundraising: { name: "募款與財務", icon: "💰" },
-            education: { name: "教育合作", icon: "📚" },
-            branding: { name: "品牌發展", icon: "🚀" },
-            vision: { name: "願景目標", icon: "⭐" }
+            operation: "組織運營 ⚙️",
+            fundraising: "募款財務 💰",
+            education: "教育合作 📚",
+            branding: "品牌發展 🚀",
+            vision: "願景目標 ⭐"
         };
 
-        // 初始化
         let currentCategory = 'all';
         let searchTerm = '';
 
-        function renderContent() {
-            const contentArea = document.getElementById('contentArea');
+        function render() {
+            const container = document.getElementById('contentArea');
             const noResults = document.getElementById('noResults');
-            const visibleCount = document.getElementById('visibleCount');
             
-            // 過濾資料
             let filtered = qaData.filter(item => {
-                const matchCategory = currentCategory === 'all' || item.category === currentCategory;
-                const matchSearch = !searchTerm || 
-                    item.question.includes(searchTerm) || 
-                    item.solution.includes(searchTerm);
-                return matchCategory && matchSearch;
+                const matchCat = currentCategory === 'all' || item.category === currentCategory;
+                const matchSearch = !searchTerm || item.question.includes(searchTerm) || item.solution.includes(searchTerm);
+                return matchCat && matchSearch;
             });
 
-            // 更新統計
-            visibleCount.textContent = filtered.length;
+            document.getElementById('visibleCount').textContent = filtered.length;
 
             if (filtered.length === 0) {
-                contentArea.innerHTML = '';
+                container.innerHTML = '';
                 noResults.classList.add('show');
                 return;
             }
-
             noResults.classList.remove('show');
 
-            // 依分類分組
+            // 分組
             const grouped = filtered.reduce((acc, item) => {
                 if (!acc[item.category]) acc[item.category] = [];
                 acc[item.category].push(item);
                 return acc;
             }, {});
 
-            // 渲染 HTML
             let html = '';
+            const order = ['operation', 'fundraising', 'education', 'branding', 'vision'];
             
-            // 依照分類順序渲染
-            const categoryOrder = ['operation', 'fundraising', 'education', 'branding', 'vision'];
-            
-            categoryOrder.forEach(cat => {
+            order.forEach(cat => {
                 if (grouped[cat]) {
-                    const catInfo = categoryLabels[cat];
                     html += `
-                        <section class="category-section" data-category="${cat}">
-                            <div class="category-header">
-                                <span class="category-icon">${catInfo.icon}</span>
-                                <h2 class="category-title">${catInfo.name}</h2>
-                                <span class="category-count">${grouped[cat].length}</span>
-                            </div>
-                            <div class="qa-grid">
+                        <section class="category-section">
+                            <div class="category-header">${categoryLabels[cat]} (${grouped[cat].length})</div>
+                            <div class="qa-list">
                                 ${grouped[cat].map(item => `
-                                    <article class="qa-card" data-id="${item.id}">
-                                        <div class="qa-header" onclick="toggleCard(${item.id})">
+                                    <div class="qa-card" onclick="toggle(this)">
+                                        <div class="qa-header">
                                             <div class="qa-number">${item.id}</div>
-                                            <h3 class="qa-question">${highlightText(item.question)}</h3>
-                                            <span class="qa-toggle">▼</span>
+                                            <div class="qa-question">${highlight(item.question)}</div>
+                                            <div class="qa-toggle">▼</div>
                                         </div>
                                         <div class="qa-content">
                                             <div class="qa-body">
-                                                <div class="solution-box">
-                                                    <div class="solution-label">
-                                                        <span>💡</span>
-                                                        <span>核心解法</span>
-                                                    </div>
-                                                    <div class="solution-text">${highlightText(item.solution)}</div>
-                                                </div>
+                                                <div class="solution-box">${highlight(item.solution)}</div>
                                             </div>
                                         </div>
-                                    </article>
+                                    </div>
                                 `).join('')}
                             </div>
                         </section>
                     `;
                 }
             });
-
-            contentArea.innerHTML = html;
+            
+            container.innerHTML = html;
         }
 
-        // 高亮搜尋文字
-        function highlightText(text) {
+        function highlight(text) {
             if (!searchTerm) return text;
-            const regex = new RegExp(`(${searchTerm})`, 'gi');
-            return text.replace(regex, '<span class="highlight">$1</span>');
+            return text.replace(new RegExp(searchTerm, 'gi'), match => `<span class="highlight">${match}</span>`);
         }
 
-        // 展開/收合卡片
-        function toggleCard(id) {
-            const card = document.querySelector(`[data-id="${id}"]`);
+        function toggle(card) {
             card.classList.toggle('expanded');
         }
 
-        // 搜尋功能
+        // 事件
         document.getElementById('searchInput').addEventListener('input', (e) => {
-            searchTerm = e.target.value.trim();
-            renderContent();
+            searchTerm = e.target.value;
+            render();
         });
 
-        // 分類標籤功能
         document.querySelectorAll('.tag').forEach(tag => {
-            tag.addEventListener('click', () => {
+            tag.addEventListener('click', function() {
                 document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
-                tag.classList.add('active');
-                currentCategory = tag.dataset.category;
-                renderContent();
+                this.classList.add('active');
+                currentCategory = this.dataset.category;
+                render();
             });
         });
 
-        // 初始渲染
-        renderContent();
-
-        // 鍵盤快捷鍵：ESC 關閉所有，/ 聚焦搜尋
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.qa-card').forEach(card => {
-                    card.classList.remove('expanded');
-                });
-            }
-            if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
-                e.preventDefault();
-                document.getElementById('searchInput').focus();
-            }
-        });
+        render();
     </script>
 
 </body>
